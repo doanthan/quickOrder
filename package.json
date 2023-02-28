@@ -1,0 +1,28 @@
+{
+  "name": "quickorder",
+  "version": "1.0.0",
+  "description": "backend stuff",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "client": "npm run start --prefix client",
+    "server": "node server/index.js",
+    "app": "concurrently npm  \"npm run server\"  \" npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doanthan/quickOrder.git"
+  },
+  "author": "doan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doanthan/quickOrder/issues"
+  },
+  "homepage": "https://github.com/doanthan/quickOrder#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.10.0"
+  }
+}
