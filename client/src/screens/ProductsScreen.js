@@ -38,11 +38,9 @@ const ProductsScreen = () => {
         </Stack>
       ) : error ? (
         <Alert status="error">
-          <AlertIcon>
-            {" "}
-            <AlertTitle>Oops!</AlertTitle>
-            <AlertDescription>{error}</AlertDescription>
-          </AlertIcon>
+          <AlertIcon />
+          <AlertTitle>Oops!</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
         </Alert>
       ) : (
         products.map((product) => (
