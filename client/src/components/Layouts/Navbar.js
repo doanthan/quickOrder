@@ -53,7 +53,7 @@ const Navbar = () => {
           <Link as={ReactLink} to="/">
             <Flex alignItems="center">
               <Icon as={GiTechnoHeart} h={6} w={6} color="orange.400" />
-              <Text fontWeight="extrabold">Quick Order</Text>
+              <Text fontWeight="extrabold">Qrder</Text>
             </Flex>
           </Link>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
