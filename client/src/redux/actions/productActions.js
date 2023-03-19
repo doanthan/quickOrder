@@ -5,6 +5,7 @@ import {
   setLoading,
   setError,
   setProduct,
+  resetError,
 } from "../slices/products";
 
 export const getProducts = () => async (dispatch) => {
@@ -41,4 +42,8 @@ export const getProduct = (id) => async (dispatch) => {
       )
     );
   }
+};
+
+export const resetProductError = () => async (dispatch) => {
+  dispatch(resetError());
 };

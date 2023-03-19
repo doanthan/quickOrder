@@ -21,40 +21,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItem } from "../redux/actions/cartActions";
 
-const Rating = ({ rating, numberOfReviews }) => {
-  const { iconSize, setIconSize } = useState("14px");
-  return (
-    <Flex>
-      <HStack spacing="2px">
-        <StarIcon size={iconSize} w="14px" color="orange.500" />
-        <StarIcon
-          size={iconSize}
-          w="14px"
-          color={rating >= 2 ? "orange.500" : "gray.200"}
-        />
-        <StarIcon
-          size={iconSize}
-          w="14px"
-          color={rating >= 3 ? "orange.500" : "gray.200"}
-        />
-        <StarIcon
-          size={iconSize}
-          w="14px"
-          color={rating >= 4 ? "orange.500" : "gray.200"}
-        />
-        <StarIcon
-          size={iconSize}
-          w="14px"
-          color={rating >= 5 ? "orange.500" : "gray.200"}
-        />
-      </HStack>
-      <Text fontSize="md" fontWeight="bold" ml="4px">
-        {`${numberOfReviews} ${numberOfReviews === 1 ? "Review" : "Reviews"}`}
-      </Text>
-    </Flex>
-  );
-};
-
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const toast = useToast();
@@ -81,11 +47,11 @@ const ProductCard = ({ product }) => {
 
   return (
     <Stack
-      p="2"
+      p="5"
       spacing="3px"
       bg={useColorModeValue("white", "gray.800")}
       minW="240px"
-      h="450px"
+      h="400px"
       borderWidth="1px"
       rounded="lg"
       shadow="lg"
@@ -135,12 +101,7 @@ const ProductCard = ({ product }) => {
           </Box>
         </Link>
       </Flex>
-      <Flex justifyContent="space-between" alignContent="center" py="2">
-        <Rating
-          rating={product.rating}
-          numberOfReviews={product.numberOfReviews}
-        />
-      </Flex>
+
       <Flex justify="space-between">
         <Box fontSize="2xl" color={useColorModeValue("gray.800", "white")}>
           <Box as="span" color={"gray.600"} fontSize="lg">
