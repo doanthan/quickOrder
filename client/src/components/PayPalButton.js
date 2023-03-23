@@ -7,8 +7,16 @@ const PayPalButton = ({
   onPaymentError,
   disabled,
 }) => {
+  const initialOptions = {
+    "client-id": "test",
+    currency: "USD",
+    intent: "capture",
+    "data-client-token": "abc123xyz==",
+  };
   return (
-    <PayPalScriptProvider options={{ "client-id": PAYPAL_CLIENT_ID }}>
+    <PayPalScriptProvider
+      options={{ currency: "AUD", "client-id": PAYPAL_CLIENT_ID }}
+    >
       <PayPalButtons
         disabled={disabled}
         forceReRender={[total()]}

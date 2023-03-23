@@ -2,6 +2,12 @@ import { Box, Heading, Stack, Flex } from "@chakra-ui/react";
 import { Navigate, useLocation } from "react-router-dom";
 import CheckoutOrderSummary from "../components/CheckoutOrderSummary";
 import ShippingInformation from "../components/ShippingInformation";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51MomXcJ9N4IYCbeUEPu3gCSJStkRHDROrd5dcU5wNRadRJI0CrzOkZZZpSOtnC7qHMISiiF31uhr53HuGVtEnyTB00Cr8tG2KK"
+);
 
 const CheckoutScreen = () => {
   return (
@@ -29,7 +35,9 @@ const CheckoutScreen = () => {
           </Stack>
         </Stack>
         <Flex direction="column" align="center" flex="1">
-          <CheckoutOrderSummary />
+          <Elements stripe={stripePromise}>
+            <CheckoutOrderSummary />
+          </Elements>
         </Flex>
       </Stack>
     </Box>

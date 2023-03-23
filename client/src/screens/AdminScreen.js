@@ -37,8 +37,8 @@ const AdminConsoleScreen = () => {
           <Tabs size="md" variant="enclosed">
             <TabList>
               <Tab>Users</Tab>
-              <Tab>Orders</Tab>
               <Tab>Products</Tab>
+              <Tab>Orders</Tab>
               <Tab>Reviews</Tab>
             </TabList>
             <TabPanels>

@@ -16,15 +16,22 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    lastLogin: {
+      type: Date,
+    },
     isAdmin: {
       type: Boolean,
       type: String,
       default: false,
     },
-    company: {
-      type: String,
-      required: true,
-    },
+    stores: [
+      {
+        id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Store",
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

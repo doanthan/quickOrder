@@ -30,8 +30,7 @@ const ProductCard = ({ product }) => {
   const addItem = (id) => {
     if (cart.some((cartItem) => cartItem.id === id)) {
       toast({
-        description:
-          "This item is already in your cart. Go to your cart to change the amount.",
+        description: "This item is already in your cart.",
         status: "error",
         isClosable: true,
       });
@@ -51,7 +50,7 @@ const ProductCard = ({ product }) => {
       spacing="3px"
       bg={useColorModeValue("white", "gray.800")}
       minW="240px"
-      h="400px"
+      minH="200px"
       borderWidth="1px"
       rounded="lg"
       shadow="lg"
@@ -109,23 +108,20 @@ const ProductCard = ({ product }) => {
           </Box>
           {Number(product.price).toFixed(2)}
         </Box>
-        <Tooltip
-          label="Add to cart"
-          bg="white"
-          placement={"top"}
-          color={"gray.800"}
-          fontSize={"1.2em"}
-        >
-          <Button
-            variant="ghost"
-            display={"flex"}
-            isDisabled={product.stock <= 0}
-            onClick={() => addItem(product._id)}
-          >
-            <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
-          </Button>
-        </Tooltip>
       </Flex>
+      <Stack>
+        <Button variant="outline" isDisabled={product.stock <= 0}>
+          Buy Now
+        </Button>
+        <Button
+          variant="outline"
+          display={"flex"}
+          isDisabled={product.stock <= 0}
+          onClick={() => addItem(product._id)}
+        >
+          Add to Cart
+        </Button>
+      </Stack>
     </Stack>
   );
 };

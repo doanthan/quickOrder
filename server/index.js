@@ -6,6 +6,7 @@ import express from "express";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import { Server } from "socket.io";
 
 dotenv.config();
 connectToDatabase();
@@ -19,6 +20,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 
 app.use;
-app.listen(port, () => {
+var server = app.listen(port, () => {
   console.log(`server runs on port ${port}`);
 });
+const io = new Server(server);

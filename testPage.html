@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search Google</title>
+</head>
+<body>
+	<h1>Search Google</h1>
+	<form>
+		<label for="field1">Field 1:</label>
+		<input type="text" id="field1"><br>
+
+		<label for="field2">Field 2:</label>
+		<input type="text" id="field2"><br>
+
+		<input type="button" value="Search" onclick="searchGoogle()">
+	</form>
+
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+		function searchGoogle() {
+			const field1Value = document.getElementById("field1").value;
+			const field2Value = document.getElementById("field2").value;
+
+
+			const queryParams = new URLSearchParams();
+			queryParams.set("q", `${field1Value} ${field2Value} ${field3Value} ${field4Value}`);
+
+			const searchUrl = `https://www.google.com/search?${queryParams}`;
+
+			axios.get(searchUrl)
+				.then(response => {
+					console.log(response.data);
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+

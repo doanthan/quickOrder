@@ -51,7 +51,9 @@ const RegistrationScreen = () => {
   }, [userInfo, redirect, error, navigate, toast]);
 
   const onSubmit = (values) => {
-    dispatch(registerUser(values.name, values.email, values.password));
+    dispatch(
+      registerUser(values.name, values.email, values.password, values.storeName)
+    );
   };
 
   const {
@@ -140,6 +142,23 @@ const RegistrationScreen = () => {
                   />
                   <FormErrorMessage>
                     {errors.email && errors.email.message}
+                  </FormErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={errors.storeName} mb="6">
+                  <FormLabel htmlFor="storeName">Store Name</FormLabel>
+                  <Input
+                    id="storeName"
+                    placeholder="Store Name"
+                    {...register("storeName", {
+                      required: "This is required",
+                      minLength: {
+                        value: 4,
+                        message: "Minimum length should be 4",
+                      },
+                    })}
+                  />
+                  <FormErrorMessage>
+                    {errors.storeName && errors.storeName.message}
                   </FormErrorMessage>
                 </FormControl>
                 <PasswordTextField

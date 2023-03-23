@@ -57,6 +57,10 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    storeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Store",
+    },
   },
   { timestamps: true }
 );

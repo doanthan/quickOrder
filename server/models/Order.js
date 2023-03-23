@@ -54,6 +54,10 @@ const orderSchema = new mongoose.Schema(
     deliveredAt: {
       type: Date,
     },
+    storeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Store",
+    },
   },
   { timestamps: true }
 );

@@ -60,15 +60,6 @@ const ProductScreen = () => {
     }
   };
 
-  //   const hasUserReviewed = () =>
-  //     product.reviews.some((item) => item.user === userInfo._id);
-
-  //   const onSubmit = () => {
-  //     dispatch(
-  //       createProductReview(product._id, userInfo._id, comment, rating, title)
-  //     );
-  //   };
-
   const addItem = () => {
     dispatch(addCartItem(product._id, amount));
     toast({
