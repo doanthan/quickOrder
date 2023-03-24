@@ -1,7 +1,10 @@
 import User from "../models/User.js";
 import Order from "../models/Order.js";
+import Store from "../models/Store.js";
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
+import slugify from "slugify";
+import mongoose from "mongoose";
 
 //TODO: redefine expiresIn
 const genToken = (id) => {
@@ -32,36 +35,64 @@ const loginUser = asyncHandler(async (req, res) => {
 
 // POST register user
 const registerUser = asyncHandler(async (req, res) => {
-  console.log("TODO: STORENAME CREATE");
   const { name, email, password, storeName } = req.body;
 
   const userExists = await User.findOne({ email });
   if (userExists) {
+    //TO DO Create a new store for same email here
     res.status(400).send("We already have an account with that email address.");
-  }
-
-  const user = await User.create({
-    name,
-    email,
-    password,
-  });
-
-  if (user) {
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: genToken(user._id),
-      createdAt: user.createdAt,
-    });
   } else {
-    res.status(400).send("We could not register you.");
-    throw new Error(
-      "Something went wrong. Please check your data and try again."
-    );
+    //slugify the store name
+    const store = new Store({ name: storeName });
+    store.slug = slugify(storeName);
+    const savedStore = await _saveStore(store, 0, res);
+    const user = await User.create({
+      name,
+      email,
+      password,
+      storeId: mongoose.Types.ObjectId(savedStore._id),
+    });
+
+    if (user) {
+      res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: genToken(user._id),
+        createdAt: user.createdAt,
+      });
+    } else {
+      res.status(400).send("We could not register you.");
+      throw new Error(
+        "Something went wrong. Please check your data and try again."
+      );
+    }
   }
 });
+
+//slugify the store record
+const _saveStore = async (store, number, res) => {
+  console.log("_saveStore Hit");
+  if (number !== 0) {
+    store.slug += `${number}`;
+  }
+  try {
+    const createdStore = store.save();
+    return createdStore;
+  } catch (e) {
+    if (e.code === 11000 && e.keyPattern && e.keyPattern.slug) {
+      console.log("recurring save");
+      const add = number + 1;
+      store.slug = slugify(`${slug}`, {
+        lower: true,
+        replacement: "",
+      });
+      return _saveProfile(profile, add, res);
+    }
+    return res.status(422).send(e.message);
+  }
+};
 
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);

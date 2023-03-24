@@ -9,6 +9,7 @@ import {
   Link,
   Divider,
   useToast,
+  Button,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as ReactLink } from "react-router-dom";
@@ -20,8 +21,37 @@ import PayPalButton from "./PayPalButton";
 import { resetCart } from "../redux/actions/cartActions";
 
 import { useNavigate } from "react-router-dom";
+import {
+  PaymentRequestButtonElement,
+  useStripe,
+} from "@stripe/react-stripe-js";
 
 const CheckoutOrderSummary = () => {
+  const stripe = useStripe();
+  const [paymentRequest, setPaymentRequest] = useState(null);
+
+  useEffect(() => {
+    if (stripe) {
+      const pr = stripe.paymentRequest({
+        country: "US",
+        currency: "usd",
+        total: {
+          label: "Demo total",
+          amount: 1099,
+        },
+        requestPayerName: true,
+        requestPayerEmail: true,
+      });
+
+      // Check the availability of the Payment Request API.
+      pr.canMakePayment().then((result) => {
+        if (result) {
+          setPaymentRequest(pr);
+        }
+      });
+    }
+  }, [stripe]);
+
   const colorMode = mode("gray.600", "gray.400");
   const cartItems = useSelector((state) => state.cart);
   const { cart, subtotal, expressShipping } = cartItems;
@@ -126,6 +156,7 @@ const CheckoutOrderSummary = () => {
         onPaymentError={onPaymentError}
         disabled={buttonDisabled}
       />
+      <Button variant="outline">Google Pay</Button>
       <Box align="center">
         <Text fontSize="sm">
           Have questions? or need help to complete your order?

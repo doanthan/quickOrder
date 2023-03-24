@@ -81,7 +81,7 @@ const RegistrationScreen = () => {
                 as={ReactLink}
                 to="/registration"
                 variant="link"
-                colorScheme="orange"
+                colorScheme="blue"
               >
                 Sign in
               </Button>
@@ -207,13 +207,14 @@ const RegistrationScreen = () => {
             </Stack>
             <Stack spacing="6">
               <Button
-                colorScheme="orange"
+                colorScheme="blue"
                 size="lg"
                 fontSize="md"
                 isLoading={loading}
                 type="submit"
+                variant="outline"
               >
-                Sign in
+                Create Store
               </Button>
             </Stack>
           </Stack>

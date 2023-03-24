@@ -1,5 +1,4 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import PAYPAL_CLIENT_ID from "../client_id";
 
 const PayPalButton = ({
   total,
@@ -15,7 +14,11 @@ const PayPalButton = ({
   };
   return (
     <PayPalScriptProvider
-      options={{ currency: "AUD", "client-id": PAYPAL_CLIENT_ID }}
+      options={{
+        currency: "AUD",
+        "client-id":
+          "AbWJPlzbHCozZ4v2mTSAofkuW9u-A9v8lvO9yYMu6EOAuNWRR1POHH_Oh8p2bG0p5VuA6zxd_ugK2UwK",
+      }}
     >
       <PayPalButtons
         disabled={disabled}

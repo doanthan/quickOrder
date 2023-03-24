@@ -74,8 +74,14 @@ const ProductCard = ({ product }) => {
           bg="red.200"
         />
       )}
-      <Image p={4} src={product.image} alt={product.name} roundedTop="lg" />
-
+      <Link
+        as={ReactLink}
+        to={`/product/${product._id}`}
+        pt="2"
+        cursor="pointer"
+      >
+        <Image p={4} src={product.image} alt={product.name} roundedTop="lg" />
+      </Link>
       <Box flex="1" maxH="5" alignItems="baseline">
         {product.stock <= 0 && (
           <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">

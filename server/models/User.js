@@ -24,14 +24,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: false,
     },
-    stores: [
-      {
-        id: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Store",
-        },
-      },
-    ],
+    storeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Store",
+    },
   },
   { timestamps: true }
 );
