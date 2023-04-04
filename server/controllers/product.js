@@ -1,5 +1,6 @@
 import Product from "../models/Product.js";
 import asyncHandler from "express-async-handler";
+import Stripe from "stripe";
 
 const getProducts = async (req, res) => {
   const products = await Product.find({});
@@ -30,20 +31,40 @@ const createNewProduct = asyncHandler(async (req, res) => {
     description,
   } = req.body;
 
+  const stripe = Stripe(process.env.STRIPE_SECRET);
+  const product = await stripe.products.create({
+    name,
+    active: true,
+    description,
+    images: [image],
+    metadata: { storeId: req.user.storeId.toString() },
+  });
+
+  const stripePrice = await stripe.prices.create({
+    currency: "aud",
+    product: product.id,
+    unit_amount: price * 100,
+    active: true,
+    metadata: { storeId: req.user.storeId.toString() },
+  });
+
   const newProduct = await Product.create({
     brand,
     name,
     category,
     stock,
     price,
-    image: "/images/" + image,
+    image,
     productIsNew,
     description,
+    stripeProductId: product.id,
+    stripePriceId: stripePrice.id,
+    storeId: req.user.storeId,
   });
   await newProduct.save();
 
   const products = await Product.find({});
-
+  console.log("test");
   if (newProduct) {
     res.json(products);
   } else {

@@ -13,7 +13,7 @@ const protectRoute = asyncHandler(async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
 
-      req.user = User.findById(decoded.id);
+      req.user = await User.findById(decoded.id);
       next();
     } catch (error) {
       res.status(401);
@@ -29,6 +29,17 @@ const protectRoute = asyncHandler(async (req, res, next) => {
 
 const admin = (req, res, next) => {
   if (req.user && req.user.isAdmin !== "false") {
+    console.log(req.user);
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized as an admin.");
+  }
+};
+
+//TO:DO when there are multiple stores pp
+const companyAdmin = (req, res, next) => {
+  if (req.user && req.user.isAdmin !== "false") {
     next();
   } else {
     console.log(req.user);
@@ -37,4 +48,4 @@ const admin = (req, res, next) => {
   }
 };
 
-export { protectRoute, admin };
+export { protectRoute, admin, companyAdmin };

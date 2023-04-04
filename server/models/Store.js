@@ -14,6 +14,10 @@ const storeSchema = new mongoose.Schema(
       required: true,
       unique: "true",
     },
+    totalSales: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

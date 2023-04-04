@@ -8,6 +8,10 @@ const orderSchema = new mongoose.Schema(
     phoneNumber: {
       type: String,
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
     orderItems: [
       {
         name: { type: String, required: true },

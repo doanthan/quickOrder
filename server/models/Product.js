@@ -57,6 +57,19 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isVariant: {
+      type: Boolean,
+      default: false,
+    },
+    stripeProductId: {
+      type: String,
+      required: true,
+    },
+    stripePriceId: {
+      type: String,
+      required: true,
+    },
+    variants: [{ label: { type: String } }],
     storeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Store",
