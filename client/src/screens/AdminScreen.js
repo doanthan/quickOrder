@@ -39,7 +39,7 @@ const AdminConsoleScreen = () => {
               <Tab>Users</Tab>
               <Tab>Products</Tab>
               <Tab>Orders</Tab>
-              <Tab>Reviews</Tab>
+              <Tab>QR Code</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>

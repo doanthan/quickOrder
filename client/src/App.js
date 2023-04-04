@@ -49,6 +49,7 @@ function App() {
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/registration" element={<RegistrationScreen />} />
             <Route path="/admin-console" element={<AdminConsoleScreen />} />
+            <Route path="/:slug"></Route>
             <Route path="/mtest1" element={<MTest1 />} />
             <Route path="/mtest2" element={<MTest2 />} />
             <Route path="/mtest3" element={<MTest3 />} />

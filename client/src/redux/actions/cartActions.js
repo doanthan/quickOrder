@@ -18,6 +18,8 @@ export const addCartItem = (id, qty) => async (dispatch) => {
       image: data.image,
       price: data.price,
       stock: data.stock,
+      stripePriceId: data.stripePriceId,
+      stripeProductId: data.stripeProductId,
       qty,
     };
     dispatch(cartItemAdd(itemToAdd));

@@ -11,17 +11,23 @@ import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link as ReactLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CartOrderSummary = () => {
   const [buttonLoading, setButtonLoading] = useState();
   const standardShipping = Number(4.99).toFixed(2);
   const cartItems = useSelector((state) => state.cart);
-  const { subtotal } = cartItems;
+  const { cart, subtotal, expressShipping } = cartItems;
   const navigate = useNavigate();
 
-  const checkoutHandler = () => {
+  const checkoutHandler = async () => {
     setButtonLoading(true);
-    navigate("/checkout");
+    const response = await axios.post("create-checkout-session", cart);
+    console.log(response);
+    if (response) {
+      window.location.assign(response.data.url);
+    }
+    setButtonLoading(false);
   };
 
   return (
@@ -61,8 +67,6 @@ const CartOrderSummary = () => {
         </Flex>
       </Stack>
       <Button
-        as={ReactLink}
-        to="/checkout"
         colorScheme="orange"
         size="lg"
         fontSize="md"

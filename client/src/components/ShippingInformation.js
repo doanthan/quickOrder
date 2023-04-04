@@ -48,6 +48,35 @@ const ShippingInformation = () => {
 
   return (
     <VStack as="form">
+      <Box w="100%" h="180px" pr="8">
+        <RadioGroup defaultValue="false">
+          <Stack
+            direction={{ base: "column", lg: "row" }}
+            align={{ lg: "flex-start" }}
+          >
+            <Stack pr="10" spacing={{ base: "8", md: "10" }} flex="1.5">
+              <Box>
+                <Radio value="true">
+                  <Text fontWeight="bold">Pickup</Text>
+                  <Text>Dispatched in 24 hours.</Text>
+                </Radio>
+              </Box>
+              <Stack spacing="6">Express</Stack>
+            </Stack>
+            <Radio value="false">
+              <Tooltip label="Free shipping for orders of $1000 or more!">
+                <Box>
+                  <Text fontWeight="bold">Standard $4.99</Text>
+                  <Text>Dispatched in 2 - 3 days</Text>
+                </Box>
+              </Tooltip>
+            </Radio>
+          </Stack>
+        </RadioGroup>
+      </Box>
+      <Heading fontSize="2xl" fontWeight="extrabold" mb="10" pb="5">
+        Delivery Address
+      </Heading>
       <FormControl
         onChange={() =>
           isValid && isDirty
@@ -128,35 +157,6 @@ const ShippingInformation = () => {
           </FormErrorMessage>
         </FormControl>
       </FormControl>
-      <Box w="100%" h="180px" pr="5">
-        <Heading fontSize="2xl" fontWeight="extrabold" mb="10">
-          Shipping Method
-        </Heading>
-        <RadioGroup defaultValue="false">
-          <Stack
-            direction={{ base: "column", lg: "row" }}
-            align={{ lg: "flex-start" }}
-          >
-            <Stack pr="10" spacing={{ base: "8", md: "10" }} flex="1.5">
-              <Box>
-                <Radio value="true">
-                  <Text fontWeight="bold">Express 14.99</Text>
-                  <Text>Dispatched in 24 hours.</Text>
-                </Radio>
-              </Box>
-              <Stack spacing="6">Express</Stack>
-            </Stack>
-            <Radio value="false">
-              <Tooltip label="Free shipping for orders of $1000 or more!">
-                <Box>
-                  <Text fontWeight="bold">Standard $4.99</Text>
-                  <Text>Dispatched in 2 - 3 days</Text>
-                </Box>
-              </Tooltip>
-            </Radio>
-          </Stack>
-        </RadioGroup>
-      </Box>
     </VStack>
   );
 };

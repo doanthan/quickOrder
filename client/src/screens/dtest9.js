@@ -23,7 +23,7 @@ const DTest9 = () => {
             <HStack spacing="1" justify="center">
               <Text color="muted">Don't have an account ?</Text>
               <Button variant="link" colorScheme="orange">
-                Martin test
+                doan test
               </Button>
             </HStack>
           </Stack>

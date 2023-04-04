@@ -1,35 +1,24 @@
-import {
-  Button,
-  Container,
-  Heading,
-  HStack,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "../components/StripePayment/CheckoutForm";
 
+const stripePromise = loadStripe(
+  "pk_test_51MomXcJ9N4IYCbeUEPu3gCSJStkRHDROrd5dcU5wNRadRJI0CrzOkZZZpSOtnC7qHMISiiF31uhr53HuGVtEnyTB00Cr8tG2KK"
+);
 //TODO: redefine password length
 const DTest1 = () => {
   return (
-    <Container
-      maxW="lg"
-      py={{ base: "12", md: "24" }}
-      px={{ base: "0", md: "8" }}
-      minH="4xl"
-    >
-      <Stack spacing="8">
-        <Stack spacing="6">
-          <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
-            <Heading>Thiis is a test page</Heading>
-            <HStack spacing="1" justify="center">
-              <Text color="muted">Don't have an account ?</Text>
-              <Button variant="link" colorScheme="orange">
-                Martin test
-              </Button>
-            </HStack>
-          </Stack>
-        </Stack>
-      </Stack>
-    </Container>
+    <Elements stripe={stripePromise}>
+      <Container
+        maxW="lg"
+        py={{ base: "12", md: "24" }}
+        px={{ base: "0", md: "8" }}
+        minH="4xl"
+      >
+        <CheckoutForm />
+      </Container>
+    </Elements>
   );
 };
 

@@ -26,9 +26,9 @@ const CartScreen = () => {
     cart.length === 1 ? "(1 Item)" : `(${cart.length} Items)`;
 
   return (
-    <Wrap spacing="30px" justify="center" minHeight="100vh">
+    <Wrap spacing="10px" justify="center" minHeight="100vh">
       {loading ? (
-        <Stack direction="row" spacing={4}>
+        <Stack direction="row" spacing={1}>
           <Spinner
             mt={20}
             thickness="2px"
@@ -71,7 +71,7 @@ const CartScreen = () => {
                 {/* Shopping Cart {getHeadingContent()} */}
               </Heading>
 
-              <Stack spacing="6">
+              <Stack spacing="10">
                 {cart.map((cartItem) => (
                   <CartItem key={cartItem.id} cartItem={cartItem} />
                 ))}

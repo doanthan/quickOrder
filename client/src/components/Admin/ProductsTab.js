@@ -81,7 +81,7 @@ const ProductsTab = () => {
                   <Box flex="1" textAlign="right">
                     <Box>
                       <Text mr="8px" fontWeight="bold">
-                        Add a new Product
+                        + Add a new Product
                       </Text>
                     </Box>
                   </Box>

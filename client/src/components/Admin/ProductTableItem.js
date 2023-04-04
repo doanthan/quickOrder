@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useState, useRef } from "react";
 import { MdOutlineDataSaverOn } from "react-icons/md";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, SmallAddIcon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";
 import { updateProduct, deleteProduct } from "../../redux/actions/adminActions";
 import ConfirmRemovalAlert from "./ConfirmRemovalAlert";
@@ -58,11 +58,11 @@ const ProductTableItem = ({ product }) => {
     <>
       <Tr>
         <Td>
-          <Input
+          {/* <Input
             size="sm"
             value={image}
             onChange={(e) => setImage(e.target.value)}
-          />
+          /> */}
           <Tooltip label={product.image} fontSize="sm">
             <Image src={product.image} boxSize="100px" fit="contain" />
           </Tooltip>
@@ -113,17 +113,7 @@ const ProductTableItem = ({ product }) => {
             />
             <FormControl display="flex" alignItems="center">
               <FormLabel htmlFor="productIsNewFlag" mb="0" fontSize="sm">
-                Enable
-                <Badge
-                  rounded="full"
-                  px="1"
-                  mx="1"
-                  fontSize="0.8em"
-                  colorScheme="green"
-                >
-                  New
-                </Badge>
-                badge ?
+                Enable Variant
               </FormLabel>
               <Switch
                 id="productIsNewFlag"
@@ -135,6 +125,17 @@ const ProductTableItem = ({ product }) => {
         </Td>
         <Td>
           <VStack>
+            {(product.productIsNew || productIsNew) && (
+              <Button
+                colorScheme="green"
+                w="160px"
+                variant="outline"
+                onClick={openDeleteConfirmBox}
+              >
+                <SmallAddIcon mr="5px" />
+                Add Variant
+              </Button>
+            )}
             <Button
               colorScheme="red"
               w="160px"
@@ -145,7 +146,7 @@ const ProductTableItem = ({ product }) => {
               Remove Product
             </Button>
             <Button
-              colorScheme="orange"
+              colorScheme="blue"
               w="160px"
               variant="outline"
               onClick={onSaveProduct}

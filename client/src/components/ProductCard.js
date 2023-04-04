@@ -80,7 +80,7 @@ const ProductCard = ({ product }) => {
         pt="2"
         cursor="pointer"
       >
-        <Image p={4} src={product.image} alt={product.name} roundedTop="lg" />
+        <Image src={product.image} alt={product.name} roundedTop="lg" />
       </Link>
       <Box flex="1" maxH="5" alignItems="baseline">
         {product.stock <= 0 && (

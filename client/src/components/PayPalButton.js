@@ -22,6 +22,13 @@ const PayPalButton = ({
     >
       <PayPalButtons
         disabled={disabled}
+        style={{
+          color: "silver",
+          height: 48,
+          tagline: false,
+          shape: "pill",
+          layout: "horizontal",
+        }}
         forceReRender={[total()]}
         createOrder={(data, actions) => {
           return actions.order.create({
