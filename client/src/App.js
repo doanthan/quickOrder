@@ -29,6 +29,7 @@ import DTest6 from "./screens/dtest6";
 import DTest7 from "./screens/dtest7";
 import DTest8 from "./screens/dtest8";
 import DTest9 from "./screens/dtest9";
+import Store from "./screens/store";
 
 function App() {
   return (
@@ -49,7 +50,6 @@ function App() {
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/registration" element={<RegistrationScreen />} />
             <Route path="/admin-console" element={<AdminConsoleScreen />} />
-            <Route path="/:slug"></Route>
             <Route path="/mtest1" element={<MTest1 />} />
             <Route path="/mtest2" element={<MTest2 />} />
             <Route path="/mtest3" element={<MTest3 />} />
@@ -68,6 +68,7 @@ function App() {
             <Route path="/dtest7" element={<DTest7 />} />
             <Route path="/dtest8" element={<DTest8 />} />
             <Route path="/dtest9" element={<DTest9 />} />
+            <Route path="/store/:slug" element={<Store />}></Route>
           </Routes>
         </main>
         <Footer />

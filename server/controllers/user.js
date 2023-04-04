@@ -13,19 +13,18 @@ const genToken = (id) => {
 
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOneAndUpdate(
-    { email },
-    { lastLogin: Date.now() }
-  );
+  const user = await User.findOneAndUpdate({ email }, { lastLogin: Date.now() })
+    .populate("storeId")
+    .exec();
+  console.log(user);
 
   if (user && (await user.matchPasswords(password))) {
     res.json({
       _id: user._id,
       name: user.name,
-      email: user.email,
       isAdmin: user.isAdmin,
       token: genToken(user._id),
-      createdAt: user.createdAt,
+      store: user.storeId,
     });
   } else {
     res.status(401).send("Invalid Email or Password");

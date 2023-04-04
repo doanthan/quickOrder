@@ -3,13 +3,13 @@ import asyncHandler from "express-async-handler";
 import Stripe from "stripe";
 
 const getProducts = async (req, res) => {
-  const products = await Product.find({});
+  console.log(req.query.slug);
+  const products = await Product.find({ slug: req.query.slug });
   res.json(products);
 };
 
 const getProduct = async (req, res) => {
   const product = await Product.findById(req.params.id);
-
   if (product) {
     res.json(product);
   } else {
@@ -29,6 +29,7 @@ const createNewProduct = asyncHandler(async (req, res) => {
     image,
     productIsNew,
     description,
+    slug,
   } = req.body;
 
   const stripe = Stripe(process.env.STRIPE_SECRET);
@@ -60,12 +61,16 @@ const createNewProduct = asyncHandler(async (req, res) => {
     stripeProductId: product.id,
     stripePriceId: stripePrice.id,
     storeId: req.user.storeId,
+    slug,
   });
   await newProduct.save();
-
+  console.log("slug");
+  console.log(slug);
+  //TODO I think the find products doesn't work
   const products = await Product.find({});
-  console.log("test");
+
   if (newProduct) {
+    console.log("test");
     res.json(products);
   } else {
     res.status(404);

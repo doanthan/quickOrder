@@ -15,11 +15,7 @@ import {
   Heading,
   HStack,
   Button,
-  SimpleGrid,
   useToast,
-  Tooltip,
-  Textarea,
-  Input,
 } from "@chakra-ui/react";
 import { MinusIcon, StarIcon, SmallAddIcon } from "@chakra-ui/icons";
 import { BiPackage, BiCheckShield, BiSupport } from "react-icons/bi";
@@ -29,10 +25,6 @@ import { addCartItem } from "../redux/actions/cartActions";
 import { useEffect, useState } from "react";
 
 const ProductScreen = () => {
-  const [comment, setComment] = useState("");
-  const [rating, setRating] = useState(1);
-  const [title, setTitle] = useState("");
-  const [reviewBoxOpen, setReviewBoxOpen] = useState(false);
   const [amount, setAmount] = useState(1);
   let { id } = useParams();
   const toast = useToast();

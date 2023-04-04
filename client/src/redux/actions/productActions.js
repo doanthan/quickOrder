@@ -8,10 +8,11 @@ import {
   resetError,
 } from "../slices/products";
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (slug) => async (dispatch) => {
   dispatch(setLoading(true));
+  console.log(slug);
   try {
-    const { data } = await axios.get("/api/products");
+    const { data } = await axios.get(`/api/products?slug=${slug}`);
     dispatch(setProducts(data));
   } catch (error) {
     dispatch(

@@ -82,6 +82,8 @@ const AddNewProduct = () => {
       formData
     );
     const image = response.data.url;
+    const slug = JSON.parse(localStorage.getItem("userInfo")).store.slug;
+
     dispatch(
       uploadProduct({
         brand,
@@ -92,6 +94,7 @@ const AddNewProduct = () => {
         productIsNew,
         description,
         image,
+        slug,
       })
     );
     setCroppedImage(null);

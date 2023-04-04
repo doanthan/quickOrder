@@ -31,7 +31,7 @@ app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     mode: "payment",
-    success_url: `https://www.google.com`,
+    success_url: `https://localhost:3000`,
     cancel_url: `http://localhost:3000/cart`,
   });
 
