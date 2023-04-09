@@ -3,8 +3,13 @@ import asyncHandler from "express-async-handler";
 import Stripe from "stripe";
 
 const getProducts = async (req, res) => {
-  console.log(req.query.slug);
-  const products = await Product.find({ slug: req.query.slug });
+  const { slug } = req.query;
+  let products = [];
+  if (slug && slug !== "undefined") {
+    products = await Product.find({ slug: req.query.slug });
+  } else {
+    products = await Product.find();
+  }
   res.json(products);
 };
 

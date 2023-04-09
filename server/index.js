@@ -8,11 +8,13 @@ import orderRoutes from "./routes/orderRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import { Server } from "socket.io";
 import Stripe from "stripe";
+import cors from "cors";
 
 dotenv.config();
 connectToDatabase();
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const stripe = Stripe(process.env.STRIPE_SECRET);
 
@@ -42,8 +44,17 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 
-app.use;
 var server = app.listen(port, () => {
   console.log(`server runs on port ${port}`);
 });
-const io = new Server(server);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+});
