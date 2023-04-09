@@ -19,7 +19,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { MdDriveFolderUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadProduct } from "../../redux/actions/adminActions";

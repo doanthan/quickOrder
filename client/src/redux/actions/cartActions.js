@@ -12,6 +12,7 @@ export const addCartItem = (id, qty) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
     const { data } = await axios.get(`/api/products/${id}`);
+    console.log(data);
     const itemToAdd = {
       id: data._id,
       name: data.name,
@@ -20,6 +21,8 @@ export const addCartItem = (id, qty) => async (dispatch) => {
       stock: data.stock,
       stripePriceId: data.stripePriceId,
       stripeProductId: data.stripeProductId,
+      storeId: data.storeId,
+      slug: data.slug,
       qty,
     };
     dispatch(cartItemAdd(itemToAdd));
@@ -45,6 +48,6 @@ export const setExpress = (value) => async (dispatch) => {
   dispatch(setExpressShipping(value));
 };
 
-export const resetCart = () => (dispatch) => {
-  dispatch(clearCart());
+export const resetCart = (slug) => (dispatch) => {
+  dispatch(clearCart(slug));
 };

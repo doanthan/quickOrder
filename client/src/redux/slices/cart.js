@@ -58,8 +58,16 @@ export const cartSlice = createSlice({
       state.expressShipping = payload;
       localStorage.setItem("expressShipping", payload);
     },
-    clearCart: (state) => {
-      localStorage.removeItem("cartItems");
+    clearCart: (state, { payload }) => {
+      const originalCart = JSON.parse(localStorage.getItem("cartItems"));
+      console.log(originalCart.length);
+      console.log(payload);
+      const newCart = originalCart.filter(
+        (cartItem) => cartItem.slug !== payload
+      );
+      console.log(newCart.length);
+      localStorage.setItem("cartItems", JSON.stringify(newCart));
+      // localStorage.removeItem("cartItems");
       state.cart = [];
     },
   },

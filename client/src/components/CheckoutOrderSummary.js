@@ -26,7 +26,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 
-const CheckoutOrderSummary = () => {
+const CheckoutOrderSummary = ({ slug }) => {
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
 
@@ -95,7 +95,7 @@ const CheckoutOrderSummary = () => {
       })
     );
     dispatch(resetOrder());
-    dispatch(resetCart());
+    dispatch(resetCart(slug));
     navigate("/order-success");
   };
 

@@ -13,15 +13,23 @@ import {
   AlertDescription,
   Wrap,
 } from "@chakra-ui/react";
-import { Link as ReactLink } from "react-router-dom";
+import { Link as ReactLink, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CartItem from "../components/CartItem";
 import CartOrderSummary from "../components/CartOrderSummary";
 
 const CartScreen = () => {
+  const { slug } = useParams();
+  console.log(slug);
   const cartInfo = useSelector((state) => state.cart);
   const { loading, error, cart } = cartInfo;
+  const initialCart = cart.filter((item) => item.slug === slug);
+  const [storeCart, setStoreCart] = useState(initialCart);
+  useEffect(() => {
+    const storeCart = cart.filter((item) => item.slug === slug);
+    setStoreCart(storeCart);
+  }, [cartInfo, cart, slug]);
 
   return (
     <Wrap spacing="10px" justify="center" minHeight="100vh">
@@ -42,7 +50,7 @@ const CartScreen = () => {
           <AlertTitle>We are sorry!</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
-      ) : cart.length <= 0 ? (
+      ) : storeCart.length <= 0 ? (
         <Alert status="warning">
           <AlertIcon />
           <AlertTitle>Your cart is empty.</AlertTitle>
@@ -70,7 +78,7 @@ const CartScreen = () => {
               </Heading>
 
               <Stack spacing="10">
-                {cart.map((cartItem) => (
+                {storeCart.map((cartItem) => (
                   <CartItem key={cartItem.id} cartItem={cartItem} />
                 ))}
               </Stack>

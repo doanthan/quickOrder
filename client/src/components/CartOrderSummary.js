@@ -12,13 +12,14 @@ import { FaArrowRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link as ReactLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { resetCart } from "../redux/actions/cartActions";
 
-const CartOrderSummary = () => {
+const CartOrderSummary = ({ cart, subtotal, expressShipping }) => {
   const [buttonLoading, setButtonLoading] = useState();
   const standardShipping = Number(4.99).toFixed(2);
-  const cartItems = useSelector((state) => state.cart);
-  const { cart, subtotal, expressShipping } = cartItems;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const checkoutHandler = async () => {
     setButtonLoading(true);
@@ -75,6 +76,16 @@ const CartOrderSummary = () => {
         onClick={() => checkoutHandler()}
       >
         Checkout
+      </Button>
+      <Button
+        colorScheme="orange"
+        size="lg"
+        fontSize="md"
+        rightIcon={<FaArrowRight />}
+        isLoading={buttonLoading}
+        onClick={() => dispatch(resetCart("the-apple-store"))}
+      >
+        Reset Cart
       </Button>
     </Stack>
   );
